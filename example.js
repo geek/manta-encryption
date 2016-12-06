@@ -17,7 +17,7 @@ const client = Manta.createClient({
 
 
 const file = Fs.createReadStream(__dirname + '/README.md');
-const path = '/wyatt/stor/encrypted';
+const path = '~~/stor/encrypted';
 const key = 'FFFFFFFBD96783C6C91E2222';   // 24 bytes
 
 const getKey = function (keyId, callback) {
@@ -32,7 +32,7 @@ ClientEncryption.put(path, file, { client, key, keyId: 'dev/test', cipher: 'aes/
     process.exit(1);
   }
 
-  ClientEncryption.get(path, { client, getKey }, (err, stream) => {
+  ClientEncryption.get(path, { client, getKey }, (err, stream, res) => {
     if (err) {
       console.error(err);
       process.exit(1);
@@ -41,4 +41,5 @@ ClientEncryption.put(path, file, { client, key, keyId: 'dev/test', cipher: 'aes/
     stream.pipe(process.stdout);
     console.log('\n');
   });
+
 });
