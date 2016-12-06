@@ -2,7 +2,6 @@
 
 const Fs = require('fs');
 const Manta = require('manta');
-const Vault = require('node-vault');
 const ClientEncryption = require('.');
 
 const client = Manta.createClient({
@@ -25,7 +24,6 @@ const getKey = function (keyId, callback) {
 };
 
 
-
 ClientEncryption.put(path, file, { client, key, keyId: 'dev/test', cipher: 'aes/192/cbc' }, (err) => {
   if (err) {
     console.error(err);
@@ -39,7 +37,8 @@ ClientEncryption.put(path, file, { client, key, keyId: 'dev/test', cipher: 'aes/
     }
 
     stream.pipe(process.stdout);
-    console.log('\n');
+    setImmediate(() => {
+      process.stdout.write('\n');
+    });
   });
-
 });
