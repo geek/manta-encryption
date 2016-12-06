@@ -26,7 +26,7 @@ The `callback` has the signature `(err, stream, res)`
 ### Security Checks
 
 1. The encrypted file has an HMAC generated for it using sha256 to detect tampering
-1. The unencrypted file is hashed as well as the byte length to detect tampering
+1. The unencrypted file is hashed and compared to the original, as well as the original byte length, to detect tampering
 
 
 ### Security Considerations
